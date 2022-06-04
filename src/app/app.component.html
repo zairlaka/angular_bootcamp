@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row">
+
+    <h4>server show this page by the index.html page which is using app-root component and in that component we are using app-component.html template. means this view.</h4>
+    <h4>main.ts executed first its a main file. which called app.module.ts </h4>
+    <h4>  bootstrap: [AppComponent] by this in app.module.ts angular get to know that we have this component on the start and gave no error in index.html using app-root</h4>
+    <input type="text" [(ngModel)]="name" >
+    <!-- can use this ngModel directive by importing FormsModule in app.module.ts | we are doing two way databinding here -->
+    <p> {{ name }} </p>
+
+    <app-message></app-message>
+    <!-- this is my simple component message.component.ts-->
+    <app-hello></app-hello>
+
+  </div>
+
+  <hr class="green-hr">
+  <p>pass data between compnent</p>
+  <ol>
+    <li>server-element is define in app.component and we want to use in child server-element.component</li>
+    <li>serverElements = {{'[{type: "server type", name: "server name", content: "server content here"}];' }} in parent app.ct</li>
+    <li>@Input() element: {{ '{ type: string, name: string, content: string };'}}' in child server-element.component </li>
+    <li>bound and pass the property down to that component</li>
+    <li>you can use alias @Input(new-element) element: ... now you have to use this property with new-element </li>
+  </ol>
+  <app-cockpit
+    (serverCreated)="onServerAdded($event)"
+    (bpCreated)="onBlueprintAdded($event)"
+  ></app-cockpit>
+  <hr>
+  <div class="row">
+    <div class="col-xs-12">
+      <button class="btn btn-primary" (click)="onChangeFirst()">Change userName</button>
+      <button class="btn btn-danger" (click)="onDestroyFirst()">Change userName</button>
+      <app-server-element
+        *ngFor="let serverElement of serverElements"
+        [elemento]="serverElement"
+        [userName_noc]="serverElement.userName">
+        <i #serverUsername> by <u>{{ serverElement.userName }} </u></i>
+      </app-server-element>
+    </div>
+  </div>
+
+  <hr class="green-hr">
+  <temperature></temperature>
+  <hr class="green-hr">
+  <app-weather [weatherData]="weatherData"></app-weather>
+  <hr class="green-hr">
+
+</div>

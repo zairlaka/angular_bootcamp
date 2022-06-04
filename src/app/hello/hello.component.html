@@ -1,0 +1,40 @@
+<p>hello works! - created by angular cli </p> <code>ng g c hello</code>
+<br>
+
+<label>Greeter Name</label>
+<input type="text" class="form-control" (input)="onUpdateGreeterName($event)">
+<!-- $event -> is a reserved variable name known by angular we did event binding here like a keypress -->
+<br>
+<input type="text" class="form-control" [(ngModel)]="greeterName">
+
+<p>{{ greeterName }}</p>
+<p>the bove one is event binding which one way and the below one is two way binding by ngModel</p>
+<button class="btn btn-primary"
+    [disabled]="!allowGreetings"
+    (click)="onCreateGreetings()" >Greetings</button>
+    <button class="btn btn-primary"
+    [disabled]="greeterName === ''"
+    (click)="onEmptyGreeterName()" >Clear all</button>
+<!-- we can empty ^ greeterName = '' like this -->
+<p>{{ allowGreetings }}</p>
+<!-- this is ^ string interpolation -->
+<p [innerText]="allowGreetings"></p>
+<!-- this is ^ property binding -->
+<p>{{ greetingStatus }}</p>
+<!-- this is ^ event binding on greeting button onClick -->
+<!-- YOUR_ELEMENT properties  or YOUR_ELEMENT events search this -->
+<p *ngIf="buttonClicked; else noGreetings">Greeter name is {{greeterName}}. unlike other this will show conditionally and bound to show only when we click on greetings button through *ngIf. </p>
+<!-- we use above paragraph conditionally with the help of *ngIf directive. should return boolean value from "" variable, function, or expression -->
+<ng-template #noGreetings>
+    <p>No Greetings yet. Please press Greetings button</p>
+</ng-template>
+<!-- this is local reference  -->
+<p [ngStyle]="{backgroundColor: getColor()}">User is  {{ userStatus }}. we add style here base on random no.</p>
+<!-- we are binding to a property of the directive. -->
+<!-- property binding is not the same as a directive -->
+<!-- we use property binding on this directive and it expect js object key value and we can also use 'background-color: red' dash notation enclose in single quotation -->
+<p [ngClass]="{'alert-success': userStatus === 'online', 'alert-danger': userStatus === 'offline'}">User is  {{ userStatus }}. we add style here base on random no.</p>
+<!-- we use ngClass for adding or removing classes base on boolean check in values if its true then it adds that class by its key -->
+<app-message *ngFor="let greeting of greetingStatuses"></app-message>
+<p>we render above message component by *ngFor</p>
+<div *ngFor="let input of greetingStatuses; let i = index" class="bg-blue">{{ i+1 + " - " + input }}</div>
